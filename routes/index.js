@@ -4,14 +4,19 @@
 
     //routing 처리
     var express = require("express"),
-        router = express.Router();
+        router = express.Router(),
+        controller = require("../controller");
 
     router.get("/", function (req, res) {
-
+        res.render("index",{
+            title : "Library Management System"
+        })
     });
-
-    router.post("/", function (req, res) {
-
+    router.get("/list", function (req, res) {
+        controller.listAll(req,res);
     });
-
+    router.post("/list", function (req, res) {
+        var name = req.body.keyword;
+        controller.listSearch(req,res,name);
+    });
     module.exports = router;
